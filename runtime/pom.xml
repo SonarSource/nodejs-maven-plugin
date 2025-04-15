@@ -31,7 +31,7 @@
             <plugin>
                 <groupId>org.sonarsource.nodejs</groupId>
                 <artifactId>nodejs-maven-plugin</artifactId>
-                <version>${revision}</version>
+                <version>${project.version}</version>
                 <executions>
                     <execution>
                         <id>Download the Node.js runtimes</id>

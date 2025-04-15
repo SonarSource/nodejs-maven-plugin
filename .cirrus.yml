@@ -17,7 +17,7 @@ only_sonarsource_qa: &ONLY_SONARSOURCE_QA
 
 nodejs_runtimes_cache_definition: &RUNTIME_CACHE
   runtime_cache:
-    folder: runtime/downloads/downloads/
+    folder: runtime/downloads/
     fingerprint_script: cat runtime/pom.xml | grep -o "<nodeVersion>.*"
 
 eks_container_definition: &CONTAINER_DEFINITION

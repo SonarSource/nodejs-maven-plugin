@@ -110,7 +110,7 @@ public class DownloadRuntimesMojo extends AbstractMojo {
     try (ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream)) {
       FileChannel fileChannel;
       try (var fileOutputStream = new FileOutputStream(destinationFile.toString())) {
-          fileChannel = fileOutputStream.getChannel();
+        fileChannel = fileOutputStream.getChannel();
       }
 
       getLog().info("Downloading to " + destinationFile);

@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -44,8 +43,6 @@ public class CompressMojo extends AbstractMojo {
 
   @Override
   public void execute() {
-    List<String> filenames = Collections.emptyList();
-
     try {
       this.compress(
           this.filenames.stream()

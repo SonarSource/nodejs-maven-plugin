@@ -20,8 +20,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -56,7 +57,7 @@ public class DownloadRuntimesMojo extends AbstractMojo {
   public void execute() throws MojoExecutionException {
     for (var flavor : this.flavors) {
       try {
-        var url = new URL(flavor.getUrl());
+        var url = URI.create(flavor.getUrl()).toURL();
         var filename = url.getFile();
         var destinationFile = Path.of(this.targetDirectory, filename);
 
@@ -70,7 +71,7 @@ public class DownloadRuntimesMojo extends AbstractMojo {
     }
   }
 
-  private void download(RuntimeFlavor flavor, Path destinationFile) throws Exception {
+  private void download(RuntimeFlavor flavor, Path destinationFile) throws IOException, ChecksumException {
     if (Files.exists(destinationFile)) {
       getLog().info(String.format("Skipping download, file %s already exists.", destinationFile));
 
@@ -84,14 +85,11 @@ public class DownloadRuntimesMojo extends AbstractMojo {
     if (proxyUrl != null) {
       getLog().info("Downloading from " + proxyUrl);
 
-      var url = new URL(proxyUrl);
-
-      // todo: per-flavor
-      var proxyToken = this.proxyToken;
+      var url = URI.create(proxyUrl).toURL();
 
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-      connection.setRequestProperty("Authorization", String.format("Bearer %s", proxyToken));
+      connection.setRequestProperty("Authorization", String.format("Bearer %s", this.proxyToken));
       connection.setRequestMethod("GET");
 
       var responseCode = connection.getResponseCode();
@@ -102,7 +100,7 @@ public class DownloadRuntimesMojo extends AbstractMojo {
     }
 
     if (inputStream == null) {
-      var url = new URL(flavor.getUrl());
+      var url = URI.create(flavor.getUrl()).toURL();
 
       getLog().info("Downloading from " + url);
 
@@ -111,8 +109,10 @@ public class DownloadRuntimesMojo extends AbstractMojo {
 
     ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
 
-    var fileOutputStream = new FileOutputStream(destinationFile.toString());
-    var fileChannel = fileOutputStream.getChannel();
+    FileChannel fileChannel;
+    try (var fileOutputStream = new FileOutputStream(destinationFile.toString())) {
+        fileChannel = fileOutputStream.getChannel();
+    }
 
     getLog().info("Downloading to " + destinationFile);
 
@@ -121,7 +121,7 @@ public class DownloadRuntimesMojo extends AbstractMojo {
     var md5 = DigestUtils.sha256Hex(new FileInputStream(destinationFile.toFile()));
 
     if (!md5.equals(flavor.getChecksum())) {
-      throw new Exception(String.format("Invalid checksum for %s", flavor.getUrl()));
+      throw new ChecksumException(String.format("Invalid checksum for %s", flavor.getUrl()));
     }
   }
 
@@ -136,13 +136,10 @@ public class DownloadRuntimesMojo extends AbstractMojo {
       }
     };
 
-    var fileMapper = new FileMapper() {
-      public String getMappedFileName(String filename) {
-        var filenamePath = Path.of(filename);
-        var subpath = filenamePath.subpath(1, filenamePath.getNameCount());
-
-        return Path.of(flavor.getName(), subpath.toString()).toString();
-      }
+    var fileMapper = (FileMapper) filename -> {
+      var filenamePath = Path.of(filename);
+      var subpath = filenamePath.subpath(1, filenamePath.getNameCount());
+      return Path.of(flavor.getName(), subpath.toString()).toString();
     };
 
     unArchiver.setDestDirectory(new File(this.targetDirectory));
@@ -158,10 +155,9 @@ public class DownloadRuntimesMojo extends AbstractMojo {
 
     this.getLog()
       .info(
-        // todo: this should be the flavor checksum that we output
         String.format("Deploying version \"%s\" to %s", this.version, versionOutputFilePath)
       );
 
-    Files.write(versionOutputFilePath, this.version.getBytes());
+    Files.writeString(versionOutputFilePath, this.version);
   }
 }

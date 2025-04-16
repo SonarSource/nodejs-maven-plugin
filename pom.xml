@@ -26,6 +26,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.organization>sonarsource</sonar.organization>
     <sonar.projectKey>SonarSource_nodejs-maven-plugin</sonar.projectKey>
+    <sonar.coverage.exclusions>maven-plugin/**/*</sonar.coverage.exclusions>
   </properties>
 
   <modules>

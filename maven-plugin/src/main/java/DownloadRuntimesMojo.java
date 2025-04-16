@@ -111,16 +111,15 @@ public class DownloadRuntimesMojo extends AbstractMojo {
       FileChannel fileChannel;
       try (var fileOutputStream = new FileOutputStream(destinationFile.toString())) {
         fileChannel = fileOutputStream.getChannel();
-      }
+        getLog().info("Downloading to " + destinationFile);
 
-      getLog().info("Downloading to " + destinationFile);
+        fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
 
-      fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+        var md5 = DigestUtils.sha256Hex(new FileInputStream(destinationFile.toFile()));
 
-      var md5 = DigestUtils.sha256Hex(new FileInputStream(destinationFile.toFile()));
-
-      if (!md5.equals(flavor.getChecksum())) {
-        throw new ChecksumException(String.format("Invalid checksum for %s", flavor.getUrl()));
+        if (!md5.equals(flavor.getChecksum())) {
+          throw new ChecksumException(String.format("Invalid checksum for %s", flavor.getUrl()));
+        }
       }
     }
   }

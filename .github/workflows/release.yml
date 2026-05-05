@@ -1,18 +1,22 @@
 ---
 name: sonar-release
-# This workflow is triggered when publishing a new github release
+# This workflow is triggered manually to create and publish a GitHub release
 # yamllint disable-line rule:truthy
 on:
-  release:
-    types:
-      - published
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Full release version, including build number
+        required: true
+        type: string
 
 jobs:
   release:
     permissions:
       id-token: write
       contents: write
-    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@v6
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@7.0.0
     with:
+      version: ${{ inputs.version }}
       publishToBinaries: true
       slackChannel:  squad-web

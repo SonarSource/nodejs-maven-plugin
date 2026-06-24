@@ -19,4 +19,4 @@ jobs:
     with:
       version: ${{ inputs.version }}
       publishToBinaries: true
-      slackChannel: core-languages-releases
+      slackChannel: squad-corelang-releases

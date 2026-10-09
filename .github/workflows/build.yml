@@ -22,10 +22,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+      - uses: jdx/mise-action@7a4e45a543138629540c9a1616d08632b893e492 # v5.0.1
         with:
-          version: 2026.9.13
-      - uses: SonarSource/ci-github-actions/build-maven@v1
+          version: 2026.10.0
+      - uses: SonarSource/ci-github-actions/build-maven@v2
         id: build
         with:
           artifactory-reader-role: private-reader
@@ -65,7 +65,6 @@ jobs:
           deploy: false
           skip-build: true
           sonar-platform: next
-
   promote:
     needs: [build, analysis]
     runs-on: github-ubuntu-latest-s
@@ -75,7 +74,7 @@ jobs:
     env:
       BUILD_NUMBER: ${{ needs.build.outputs.build-number }}
     steps:
-      - uses: SonarSource/ci-github-actions/promote@v1
+      - uses: SonarSource/ci-github-actions/promote@v2
         with:
           promote-pull-request: true
 

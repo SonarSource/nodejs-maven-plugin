@@ -9,14 +9,19 @@ on:
         description: Full release version, including build number
         required: true
         type: string
+      dryRun:
+        description: Flag to enable the dry-run execution
+        type: boolean
+        default: false
 
 jobs:
   release:
     permissions:
       id-token: write
       contents: write
-    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@7.4.0
+    uses: SonarSource/gh-action_release/.github/workflows/main.yaml@v7
     with:
       version: ${{ inputs.version }}
+      dryRun: ${{ inputs.dryRun }}
       publishToBinaries: true
       slackChannel: squad-corelang-releases

@@ -16,7 +16,7 @@
     <version>${revision}</version>
 
     <properties>
-        <nodeVersion>24.22.1</nodeVersion>
+        <nodeVersion>26.13.1</nodeVersion>
         <artifactoryToken/>
         <maven-plugin-tools.version>3.15.1</maven-plugin-tools.version>
         <gitRepositoryName>nodejs-maven-plugin</gitRepositoryName>
@@ -56,42 +56,42 @@
                             <flavors>
                                 <flavor>
                                     <name>darwin-arm64</name>
-                                    <checksum>89c682593d76cd44233fa53b1563264e7de9cbb189cad169135c5b4fadfbc0a7</checksum>
+                                    <checksum>aec2514ea1ceb2ba52455e9ec65986f6749a06dd759e5db2a72e6889668c9735</checksum>
                                     <url>https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-darwin-arm64.tar.gz</url>
                                     <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-darwin-arm64.tar.gz</proxyUrl>
                                     <binaryName>bin/node</binaryName>
                                 </flavor>
                                 <flavor>
                                     <name>darwin-x64</name>
-                                    <checksum>d132557e7ee2b85af08b0c8c34338e65c6430f2238d01f727728ef42dc83b035</checksum>
+                                    <checksum>82bb96078a24ca50b9c9a38f2379e6be6d87171fcd400fc14c8934b3bce96e2f</checksum>
                                     <url>https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-darwin-x64.tar.gz</url>
                                     <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-darwin-x64.tar.gz</proxyUrl>
                                     <binaryName>bin/node</binaryName>
                                 </flavor>
                                 <flavor>
                                     <name>linux-arm64</name>
-                                    <checksum>33c37be234ba8bee041961047b19160f4d7d0f164e8e246f78bdd10feff148b3</checksum>
+                                    <checksum>80a330b35415382878df18d41afbd106ea89bfb3be0087d6608e289a14c5cc7d</checksum>
                                     <url>https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-linux-arm64.tar.gz</url>
                                     <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-linux-arm64.tar.gz</proxyUrl>
                                     <binaryName>bin/node</binaryName>
                                 </flavor>
                                 <flavor>
                                     <name>linux-x64</name>
-                                    <checksum>eb6728e77c576a35162c122c45ccadf224d89ff00abc8dae46cc2897c6002d7c</checksum>
+                                    <checksum>518674de2b621728a5e4486f5fb3b7d2900bb3cc4aa97969edaa463db99f9778</checksum>
                                     <url>https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64.tar.gz</url>
                                     <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64.tar.gz</proxyUrl>
                                     <binaryName>bin/node</binaryName>
                                 </flavor>
                                 <flavor>
                                     <name>linux-x64-musl</name>
-                                    <checksum>0a9eddce2d2e8f3addbe94fa46d751325b2d74f7fd1ce63296164d36b6dfc6e5</checksum>
+                                    <checksum>04bf9ed3e32ea139c9af52f6dd06879ff6f8880555a0aa1183ef2d156c0e02d3</checksum>
                                     <url>https://unofficial-builds.nodejs.org/download/release/v${nodeVersion}/node-v${nodeVersion}-linux-x64-musl.tar.gz</url>
                                     <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64-musl.tar.gz</proxyUrl>
                                     <binaryName>bin/node</binaryName>
                                 </flavor>
                                 <flavor>
                                     <name>win-x64</name>
-                                    <checksum>d2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5</checksum>
+                                    <checksum>e2edda75bfb089654705cf65a13b58933bfd5f57148e8ebda916f58a2474f1f7</checksum>
                                     <url>https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-win-x64.zip</url>
                                     <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-win-x64.zip</proxyUrl>
                                     <binaryName>node.exe</binaryName>

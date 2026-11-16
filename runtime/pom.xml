@@ -77,9 +77,9 @@
                                 </flavor>
                                 <flavor>
                                     <name>linux-x64</name>
-                                    <checksum>518674de2b621728a5e4486f5fb3b7d2900bb3cc4aa97969edaa463db99f9778</checksum>
-                                    <url>https://nodejs.org/dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64.tar.gz</url>
-                                    <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64.tar.gz</proxyUrl>
+                                    <checksum>b02b85cec428e5363f9ad1d9d9401ba290029bb01e417fe31b0de6c731c38b28</checksum>
+                                    <url>https://unofficial-builds.nodejs.org/download/release/v${nodeVersion}/node-v${nodeVersion}-linux-x64-glibc-217.tar.gz</url>
+                                    <proxyUrl>https://repox.jfrog.io/artifactory/nodejs-dist/v${nodeVersion}/node-v${nodeVersion}-linux-x64-glibc-217.tar.gz</proxyUrl>
                                     <binaryName>bin/node</binaryName>
                                 </flavor>
                                 <flavor>
